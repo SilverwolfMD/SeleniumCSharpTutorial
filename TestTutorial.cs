@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using SeleniumCSharpTutorial.Application_Layer.Pages;
+using SeleniumCSharpTutorial.Framework.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +15,7 @@ namespace SeleniumCSharpTutorial
         //class variables
         //public IWebDriver driver; // this part is not needed, as the driver (with the same identifier) is inherited from DriverHelper.
 
-        String testSite = "https://demowf.aspnetawesome.com/"; // target site
+        String aspNetSite = "https://demowf.aspnetawesome.com/"; // target site for Test1
         String autoCompFldID = "ContentPlaceHolder1_Meal"; // the target field.  ChroPath nailed this one.  We can add on the necessary characters for CSS or XPathing.
         String ajaxCheckboxXpath = "//div[@class='awe-display o-ochk']"; // locates the checkbox list and provides a foundation for element traverse
         String ajaxCheckLabelXpath = "//label[@class='awe-label']"; // localizes elements in the checkbox list by label
@@ -35,7 +37,7 @@ namespace SeleniumCSharpTutorial
         [Test]
         public void Test1()
         {
-            driver.Navigate().GoToUrl(testSite);
+            driver.Navigate().GoToUrl(aspNetSite);
             //in java, we'd use driver.findElement(By.cssSelector(autoCompFldCSS)).sendKeys("Text");
             driver.FindElement(By.Id(autoCompFldID)).SendKeys("Text"); // same syntax, just with capitals.
 
@@ -70,6 +72,20 @@ namespace SeleniumCSharpTutorial
 
             Assert.Pass();
         }//end Test1
+
+        [Test]
+        public void LoginTest() // items after the [Test] annotation are executed as independent test programs, much like methods flagged with @Test in TestNG.  Also, much like in TestNG, the [Test] identifier has to precede each of the test functions.
+        {
+
+            LandingPage landingPg = new LandingPage(driver);
+
+            driver.Navigate().GoToUrl(landingPg.pageURL); // we stored the page URL in the pageObject.
+            LoginPage loginPg = landingPg.LoginLink(); // click login and instantiate the page object for the login page itself using the same webDriver object.
+            loginPg.LoginSequence("admin", "password"); // Use the test credentials to authenticate.
+            Assert.That(landingPg.LogoutFormPresent(), Is.True, "User did not log into page."); // this is a more english-language means of using identifiers, and it also has a custom message.
+            Assert.True(landingPg.LogoutFormPresent()); // also works if we're not breaking the coding stride.
+
+        }
 
     }
 }

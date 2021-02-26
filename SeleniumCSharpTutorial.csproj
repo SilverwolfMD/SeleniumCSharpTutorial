@@ -14,4 +14,14 @@
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application_Layer\Data\" />
+    <Folder Include="Application_Layer\Features\" />
+    <Folder Include="Application_Layer\Hooks\" />
+    <Folder Include="Application_Layer\Steps\" />
+    <Folder Include="Framework\Base\" />
+    <Folder Include="Framework\Config\" />
+    <Folder Include="Framework\Extensions\" />
+  </ItemGroup>
+
 </Project>

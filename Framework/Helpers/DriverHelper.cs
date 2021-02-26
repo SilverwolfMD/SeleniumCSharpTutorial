@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SeleniumCSharpTutorial
+namespace SeleniumCSharpTutorial.Framework.Helpers
 {
     public class DriverHelper
     {

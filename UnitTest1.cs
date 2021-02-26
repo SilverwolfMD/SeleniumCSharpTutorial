@@ -18,11 +18,14 @@ namespace SeleniumCSharpTutorial
         {
             Console.WriteLine("Setup"); // This is the .NET equivalent of System.out.println() or cout <<.
             //driver = new ChromeDriver(driverPath); // this is a function overload in the C# ChromeDriver function.
-            driver = TestToolkit.InitWebDrv("firefox");
+            ChromeOptions chromeOpts = new ChromeOptions();
+            chromeOpts.AddArgument("headless");
+            driver = TestToolkit.InitWebDrv("chrome", chromeOpts);
             /*
              * ChromeDriver(path) is one overload, there's also ChromeDriver(path, ChromeOptions);
              * TestToolkit will need to be updated for this.
              */
+
 
         }//end setup
 
